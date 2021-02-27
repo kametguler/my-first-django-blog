@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+        <section class="py-5">
+      <div class="container py-4">
+        <div class="row text-center">
+          <div class="col-lg-12 mx-auto"><a class="category-link mb-3 d-inline-block" href="{% url 'category' post.category %}">{{ post.category }}</a>
+              {% if user.is_authenticated  %}
+                    {% if user.id == 1 and 2 %}
+              <a class="category-link mb-3 d-inline-block ml-1" href="{% url 'update' post.slug %}">Düzenle</a>
+                    {% endif %}
+              {% endif %}
+            <h1>{{ post.title }}</h1>
+            <ul class="list-inline mb-5">
+              <li class="list-inline-item mx-2"><a class="text-uppercase text-muted reset-anchor" href="#">{{ post.author.first_name}} {{ post.author.last_name}}</a></li>
+              <li class="list-inline-item mx-2"><a class="text-uppercase text-muted reset-anchor" href="#">{{ post.created_date | date }}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+              <p>{{ post.description | safe }}</p>
+            {% include 'partials/comments.html' %}
+            <!-- Post comments-->
+            <h3 class="h4 mb-4">Yorumlar</h3>
+              {% if not post.comments.all %}
+                  <strong class="mb-2"><b> İlk yorumu sen at !</b></strong>
+                  {% else %}
+                    {% for comment in post.comments.all %}
+            <ul class="list-unstyled comments">
+              <li>
+                <div class="media mb-4"><img class="rounded-circle shadow-sm img-fluid" src="{% static 'img/default.jpg' %}" alt="" width="60">
+                  <div class="media-body ml-3">
+                    <p class="small mb-0 text-primary">{{ comment.comment_date }}</p>
+                    <h5>{{ comment.name_lname }}</h5>
+                    <p class="text-muted text-small mb-2">{{ comment.comment | linebreaksbr }}</p><a class="reset-anchor text-small" href="#"><i class="fas fa-share mr-2 text-primary"></i><strong>Cevapla</strong></a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+                  {% endfor %}
+              {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endblock %}

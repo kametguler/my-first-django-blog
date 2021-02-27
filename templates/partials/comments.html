@@ -1,0 +1,21 @@
+
+<h3 class="h4 mb-4 mt-5">Yorumunu Bizimle Paylaş!</h3>
+
+            <form method="POST" class="mb-5">
+                {% csrf_token %}
+              <div class="row">
+                <div class="form-group col-lg-6">
+                    {{form.name_lname}}
+                </div>
+                <div class="form-group col-lg-6">
+                    {{form.email}}
+                </div>
+                <div class="form-group col-lg-12">
+                  {{form.comment}}
+                </div>
+                <div class="form-group col-lg-12">
+                  <button class="btn btn-primary" type="submit">Yorumunu paylaş</button>
+                </div>
+              </div>
+            </form>
+

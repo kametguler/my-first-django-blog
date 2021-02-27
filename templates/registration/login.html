@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content%}
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4>Login</h4>
+            </div>
+            <div class="card-body">
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <small>Henüz Kayıt Olmadın Mı? <a href="{% url 'register' %}" class="badge badge-primary">Kayıt Ol</a></small>
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

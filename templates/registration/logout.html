@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+    <h2 class="text-center mt-5">Tebrikler, Başarıyla çıkış yaptınız</h2>
+    <div class="pt-3 container">
+        <div class="text-muted d-flex justify-content-end">
+            <a href="{% url 'login' %}" class="ml-2  ">Tekrar Giriş Yap</a>
+        </div>
+    </div>
+
+{% endblock %}

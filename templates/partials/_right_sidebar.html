@@ -1,0 +1,47 @@
+{% load static %}
+<!-- Blog sidebar-->
+          <div class="col-lg-3">
+            <!-- About category-->
+            <div class="card rounded-0 border-0 bg-light mb-4 py-lg-4">
+              <div class="card-body text-center">
+                <h2 class="h3 mb-3">Hakkımda</h2><img class="rounded-circle mb-3" src="{% static 'img/kamet.jpeg'  %}" alt="..." width="100">
+                <p class="text-small text-muted">Kamet Güler Back-End Developer</p>
+                <ul class="list-inline small mb-0 text-dark">
+                  <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                  <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-twitter"></i></a></li>
+                  <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-instagram"></i></a></li>
+                  <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-linkedin"></i></a></li>
+                  <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-youtube"></i></a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- Recent posts-->
+            <div class="card rounded-0 border-0 mb-4">
+              <div class="card-body p-0">
+                <h2 class="h5 mb-3">Son Postlar</h2>
+                  {% for recent in recently %}
+                      <div class="media mb-3"><a class="d-block" href="{% url 'details' recent.id %}"><img class="img-fluid" src="{% static recent.get_image_path %}" alt="" width="70"></a>
+                        <div class="media-body ml-3">
+                            <h6> <a class="reset-anchor" href="{% url 'details' recent.id %}">{{ recent.title }}</a></h6>
+                            <p class="text-small text-muted line-height-sm mb-0">{{ recent.description | safe | truncatechars:50 }}</p>
+                        </div>
+                      </div>
+                  {% endfor %}
+            </div>
+            <br/><br/><br/><br/>
+            <div class="card rounded-0 border-0 mb-4">
+              <div class="card-body p-0">
+                  {% if object_list %}
+                      <h2 class="h5 mb-3">Kategoriler</h2>
+                  {% for post in object_list %}<a class="category-block category-block-sm bg-center bg-cover mb-2" href="{% url 'category' post.category %}"><span class="category-block-title">{{ post.category }}</span></a>
+                {% endfor %}
+              {% endif %}
+              </div>
+            </div>
+
+            <br/><br/>
+            <div class="card rounded-0 border-0 mb-4">
+              <div class="card-body p-0"><a class="d-block" href="#"><img class="img-fluid" src="{% static 'img/banner.jpg' %}" alt=""></a></div>
+            </div>
+          </div>
+        </div>

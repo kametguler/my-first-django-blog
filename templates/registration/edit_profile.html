@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container rounded bg-white mt-5">
+    <div class="row">
+        <div class="col-md-4 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="{{ user.profile.profile_image.url }}" width="200px"><span class="font-weight-bold">{% if user.first_name != '' %}{{ user.first_name }} {{ user.last_name }}{% else %} {{ user.username }}{% endif %}</span><span class="text-black-50">{{ user.email }}</span></div>
+        </div>
+        <div class="col-md-8">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="text-right">Profilini Düzenle</h6>
+                </div>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ u_form | crispy }}
+                    {{ p_form | crispy }}
+                <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Güncelle</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
